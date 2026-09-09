@@ -1,0 +1,21 @@
+[
+  {
+    "id": "5ac21346-8e0c-4494-8e7a-3eb92ff77902",
+    "text": "Full Stack Developer",
+    "categories": {
+      "location": "Remote",
+      "allLocations": ["Remote"],
+      "commitment": "Full-time",
+      "team": "Engineering",
+      "department": "Product"
+    },
+    "country": "PH",
+    "description": "<p>Build product features.</p>",
+    "descriptionPlain": "Build product features with React and PHP.",
+    "hostedUrl": "https://jobs.lever.co/acme/5ac21346-8e0c-4494-8e7a-3eb92ff77902",
+    "applyUrl": "https://jobs.lever.co/acme/5ac21346-8e0c-4494-8e7a-3eb92ff77902/apply",
+    "workplaceType": "remote",
+    "createdAt": 1788600000000,
+    "salaryRange": { "currency": "PHP", "interval": "per month", "min": 40000, "max": 60000 }
+  }
+]

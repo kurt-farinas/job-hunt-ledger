@@ -1,0 +1,38 @@
+{
+  "sources": {
+    "adzuna": {
+      "enabled": false,
+      "country": "ph",
+      "results_per_page": 50,
+      "max_pages": 3,
+      "query": "developer",
+      "min_request_interval_seconds": 2.5
+    },
+    "remoteok": { "enabled": false, "max_items": 250, "min_request_interval_seconds": 2.5 },
+    "we_work_remotely": { "enabled": false, "max_items": 250, "min_request_interval_seconds": 2.5 },
+    "remotive": { "enabled": false, "max_items": 200, "category": "software-dev", "min_request_interval_seconds": 2.5 },
+    "jobicy": { "enabled": false, "max_items": 200, "industry": "engineering", "min_request_interval_seconds": 2.5 },
+    "himalayas": {
+      "enabled": false,
+      "max_pages": 1,
+      "query": "developer",
+      "queries": [
+        "developer",
+        "frontend developer",
+        "react developer",
+        "full stack developer",
+        "laravel developer",
+        "php developer",
+        "web developer",
+        "software developer"
+      ],
+      "country": "Philippines",
+      "seniority": null,
+      "employment_type": "Full Time",
+      "exclude_worldwide": true,
+      "min_request_interval_seconds": 2.5
+    },
+    "greenhouse": { "enabled": false, "company_slugs": [], "max_items_per_company": 500, "min_request_interval_seconds": 1.0 },
+    "lever": { "enabled": true, "company_slugs": ["coins", "Aprio", "portcast", "ciandt", "rocketpartners", "getwingapp"], "results_per_page": 100, "max_pages": 5, "min_request_interval_seconds": 1.0 }
+  }
+}

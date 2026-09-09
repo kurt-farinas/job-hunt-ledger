@@ -1,0 +1,16 @@
+{
+  "0-legal-notice": "Remotive API Legal Notice",
+  "job-count": 1,
+  "jobs": [{
+    "id": 7001,
+    "url": "https://remotive.com/remote-jobs/software-dev/junior-react-developer-7001",
+    "title": "Junior React Developer",
+    "company_name": "Example Remote Labs",
+    "category": "Software Development",
+    "job_type": "full_time",
+    "publication_date": "2026-09-05T10:00:00+00:00",
+    "candidate_required_location": "Worldwide",
+    "salary": "$40,000 - $50,000 yearly",
+    "description": "<p>Build accessible React interfaces.</p>"
+  }]
+}

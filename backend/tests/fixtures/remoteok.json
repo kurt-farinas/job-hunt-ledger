@@ -1,0 +1,20 @@
+[
+  {
+    "last_updated": 1788666444,
+    "legal": "Link back to Remote OK and identify Remote OK as the source."
+  },
+  {
+    "slug": "remote-junior-react-developer-example-labs-1001",
+    "id": "1001",
+    "epoch": 1788600000,
+    "date": "2026-09-05T10:00:00+00:00",
+    "company": "Example Labs",
+    "position": "Junior React Developer",
+    "tags": ["react", "full time", "junior"],
+    "description": "<p>Build accessible React interfaces.</p><script>hidden()</script>",
+    "location": "Anywhere",
+    "salary_min": 35000,
+    "salary_max": 50000,
+    "url": "https://remoteok.com/remote-jobs/remote-junior-react-developer-example-labs-1001"
+  }
+]

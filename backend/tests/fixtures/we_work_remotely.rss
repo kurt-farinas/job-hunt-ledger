@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>We Work Remotely: Programming Jobs</title>
+    <item>
+      <title>Sample Studio: Junior Frontend Developer</title>
+      <region>Anywhere</region>
+      <category>Front-End Programming</category>
+      <description><![CDATA[<p>Build usable frontend features with React.</p><style>hidden</style>]]></description>
+      <pubDate>Sat, 05 Sep 2026 10:00:00 +0000</pubDate>
+      <guid>https://weworkremotely.com/remote-jobs/sample-studio-junior-frontend-developer</guid>
+      <link>https://weworkremotely.com/remote-jobs/sample-studio-junior-frontend-developer</link>
+    </item>
+  </channel>
+</rss>

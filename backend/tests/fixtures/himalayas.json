@@ -1,0 +1,28 @@
+{
+  "comments": "fixture based on the documented Himalayas search response",
+  "updatedAt": 1788671000,
+  "offset": 0,
+  "limit": 20,
+  "totalCount": 1,
+  "jobs": [
+    {
+      "guid": "https://himalayas.app/companies/example-ph/jobs/junior-frontend-developer",
+      "title": "Junior Frontend Developer",
+      "companyName": "Example PH",
+      "companySlug": "example-ph",
+      "employmentType": "Full Time",
+      "locationRestrictions": ["Philippines"],
+      "timezoneRestrictions": ["UTC+8"],
+      "categories": ["Software Development"],
+      "seniority": ["Entry-level"],
+      "description": "<p>Build accessible React applications.</p>",
+      "pubDate": 1788670645,
+      "expiryDate": "2026-10-01T00:00:00Z",
+      "applicationLink": "https://himalayas.app/companies/example-ph/jobs/junior-frontend-developer",
+      "minSalary": 40000,
+      "maxSalary": 45000,
+      "currency": "PHP",
+      "salaryPeriod": "monthly"
+    }
+  ]
+}

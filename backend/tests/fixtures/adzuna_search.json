@@ -1,0 +1,45 @@
+{
+  "__CLASS__": "Adzuna::API::Response::JobSearchResults",
+  "count": 3,
+  "results": [
+    {
+      "id": "example-1001",
+      "title": " Junior React Developer ",
+      "company": {"display_name": "Example Software Co."},
+      "location": {"display_name": "Makati, Metro Manila", "area": ["Philippines", "Metro Manila", "Makati"]},
+      "redirect_url": "https://www.adzuna.example/jobs/land/ad/example-1001?source=api",
+      "created": "2026-09-01T10:15:00Z",
+      "description": "<p>Build <strong>React</strong> &amp; Laravel apps.</p><script>untrusted()</script><p>Hybrid work.</p>",
+      "contract_time": "full_time",
+      "contract_type": "permanent",
+      "work_arrangement": "hybrid",
+      "salary_min": 30000,
+      "salary_max": 45000,
+      "salary_currency": "PHP",
+      "salary_period": "month",
+      "salary_is_predicted": 0
+    },
+    {
+      "id": 1002,
+      "title": "PHP Developer",
+      "company": {"display_name": "Example Remote Team"},
+      "location": {"display_name": "Worldwide"},
+      "redirect_url": "https://www.adzuna.example/jobs/land/ad/1002",
+      "created": "2026-09-01T11:30:00+08:00",
+      "description": "An API-supplied description snippet.",
+      "remote": true,
+      "contract_type": "contract",
+      "salary_min": 40000,
+      "salary_max": 60000,
+      "salary_is_predicted": "1"
+    },
+    {
+      "id": "example-1003",
+      "title": "Web Developer",
+      "company": {},
+      "location": {},
+      "redirect_url": "https://www.adzuna.example/jobs/land/ad/example-1003",
+      "contract_type": "permanent"
+    }
+  ]
+}

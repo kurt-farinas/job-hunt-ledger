@@ -1,0 +1,22 @@
+{
+  "jobs": [
+    {
+      "id": 127817,
+      "internal_job_id": 144381,
+      "title": "Junior React Developer",
+      "first_published": "2026-09-05T10:00:00Z",
+      "updated_at": "2026-09-06T10:00:00Z",
+      "requisition_id": "ENG-17",
+      "location": { "name": "Metro Manila, Philippines (Hybrid)" },
+      "absolute_url": "https://boards.greenhouse.io/acme/jobs/127817",
+      "content": "&lt;p&gt;Build React interfaces with a Laravel team.&lt;/p&gt;",
+      "metadata": [
+        { "id": 9, "name": "Employment Type", "value_type": "text", "value": "Full-time" }
+      ],
+      "pay_input_ranges": [
+        { "min_cents": 3500000, "max_cents": 5000000, "currency_type": "PHP", "title": "Monthly range" }
+      ]
+    }
+  ],
+  "meta": { "total": 1 }
+}

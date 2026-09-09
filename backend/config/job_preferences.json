@@ -1,0 +1,48 @@
+{
+  "included_title_keywords": [
+    "junior developer", "entry level developer", "associate developer",
+    "frontend developer", "front end developer", "full stack developer",
+    "full-stack developer", "react developer", "laravel developer", "php developer",
+    "web developer", "software developer", "frontend engineer", "front end engineer",
+    "full stack engineer", "full-stack engineer", "software engineer", "web engineer",
+    "react engineer", "full stack product engineer", "fresh graduate",
+    "new graduate", "new grad", "graduate developer", "graduate engineer",
+    "developer trainee", "software trainee"
+  ],
+  "excluded_seniority_keywords": [
+    "senior", "sr.", "lead", "manager", "architect", "principal", "staff",
+    "director", "head of", "vp", "vice president"
+  ],
+  "accepted_locations": [
+    "Philippines", "Metro Manila", "Manila", "Luzon"
+  ],
+  "accepted_remote_locations": [
+    "Philippines", "Metro Manila", "Manila"
+  ],
+  "accepted_hybrid_on_site_locations": [
+    "Luzon", "Metro Manila", "Manila", "NCR", "National Capital Region",
+    "Makati", "Quezon City", "Taguig", "Pasig", "Mandaluyong", "Pasay",
+    "Muntinlupa", "Paranaque", "Las Pinas", "Caloocan", "Valenzuela",
+    "Malabon", "Navotas", "San Juan", "Pateros", "Marikina",
+    "Ilocos Region", "Ilocos Norte", "Ilocos Sur", "La Union", "Pangasinan",
+    "Cagayan Valley", "Cagayan", "Isabela", "Nueva Vizcaya", "Quirino", "Batanes",
+    "Central Luzon", "Aurora", "Bataan", "Bulacan", "Nueva Ecija", "Pampanga",
+    "Tarlac", "Zambales", "CALABARZON", "Batangas", "Cavite", "Laguna",
+    "Quezon", "Rizal", "Bicol Region", "Albay", "Camarines Norte",
+    "Camarines Sur", "Catanduanes", "Masbate", "Sorsogon", "Cordillera",
+    "Abra", "Apayao", "Benguet", "Ifugao", "Kalinga", "Mountain Province",
+    "Baguio", "MIMAROPA", "Marinduque", "Occidental Mindoro",
+    "Oriental Mindoro", "Palawan", "Romblon"
+  ],
+  "accepted_work_arrangements": ["Remote", "Hybrid", "On-site"],
+  "require_work_arrangement_match": true,
+  "accepted_employment_types": ["Full-time"],
+  "require_employment_type_match": true,
+  "preferred_companies": [],
+  "excluded_companies": [],
+  "excluded_keywords": [],
+  "stale_job_threshold_days": 30,
+  "minimum_salary": null,
+  "minimum_salary_currency": null,
+  "minimum_salary_period": null
+}
