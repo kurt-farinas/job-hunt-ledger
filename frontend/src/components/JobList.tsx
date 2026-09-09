@@ -36,7 +36,10 @@ interface JobListProps {
 }
 
 export function JobList({ data, filters, noteDrafts, pending, onFilters, onOpen, onStatus, onNoteDraft, onSaveNotes }: JobListProps) {
-  if (!data.items.length) return <div className="empty-state"><FileSearch size={32} /><h2>No leads in this view</h2><p>Adjust the survey controls or run a fresh search. Existing notes and application history stay untouched.</p></div>
+  if (!data.items.length) {
+    const inboxIsEmpty = filters.status === 'New' && filters.stale === false
+    return <div className="empty-state"><FileSearch size={32} /><h2>{inboxIsEmpty ? "You're caught up" : 'No leads in this view'}</h2><p>{inboxIsEmpty ? 'Run Find jobs now to check the direct company feeds for fresh matches. Jobs you already decided on remain in status history.' : 'Adjust the survey controls or run a fresh search. Existing notes and application history stay untouched.'}</p></div>
+  }
   return <>
     <div className="ledger" aria-label="Job leads">
       <div className="ledger__head" aria-hidden="true"><span>Role and place</span><span>Match evidence</span><span>Source record</span><span>Tracking</span></div>

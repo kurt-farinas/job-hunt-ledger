@@ -39,7 +39,10 @@ export function makeApi(overrides: Partial<DashboardApi> = {}): DashboardApi {
   let views = [savedView]
   const implementation: DashboardApi = {
     health: vi.fn().mockResolvedValue({ status: 'ok', database: 'ok', timezone: 'Asia/Manila', scheduler_running: true, next_refresh_at: null, active_refresh_run_id: null }),
-    jobs: vi.fn(async () => data([currentJob])),
+    jobs: vi.fn(async filters => data([currentJob].filter(item =>
+      (!filters.status || item.status === filters.status) &&
+      (filters.stale === undefined || item.is_stale === filters.stale)
+    ))),
     job: vi.fn(async () => ({ ...currentJob, status_history: job.status_history })),
     createManualJob: vi.fn(async payload => ({ ...currentJob, id: 99, ...payload, source: 'linkedin', status: 'New', location: '', work_arrangement: null, employment_type: null, match_reasons: ['Manually saved from a trusted source'] })),
     updateJob: vi.fn(async (_id, patch) => { currentJob = { ...currentJob, ...patch }; return { ...currentJob, status_history: job.status_history } }),

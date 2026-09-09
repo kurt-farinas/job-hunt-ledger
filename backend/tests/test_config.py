@@ -38,12 +38,17 @@ def test_checked_in_configs_have_safe_defaults():
     assert prefs.stale_job_threshold_days == 30
     assert prefs.minimum_salary is None
     assert prefs.accepted_locations == ["Philippines", "Metro Manila", "Manila", "Luzon"]
-    assert prefs.accepted_remote_locations == ["Philippines", "Metro Manila", "Manila"]
+    assert prefs.accepted_remote_locations == [
+        "Philippines", "Metro Manila", "Manila", "Worldwide", "Global",
+        "Anywhere", "Anywhere in the World", "Location Independent", "APAC",
+        "Asia", "Southeast Asia", "South East Asia", "SEA",
+    ]
     assert "Makati" in prefs.accepted_hybrid_on_site_locations
     assert "Cavite" in prefs.accepted_hybrid_on_site_locations
+    assert {"Clark", "Angeles City", "Antipolo", "Bacoor", "Santa Rosa", "Legazpi"} <= set(prefs.accepted_hybrid_on_site_locations)
     assert prefs.accepted_work_arrangements == ["Remote", "Hybrid", "On-site"]
     assert prefs.require_work_arrangement_match is True
-    assert prefs.accepted_employment_types == ["Full-time"]
+    assert prefs.accepted_employment_types == ["Full-time", "Contract"]
     assert prefs.require_employment_type_match is True
 
 

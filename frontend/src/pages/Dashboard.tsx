@@ -11,7 +11,7 @@ import { SavedViews } from '../components/SavedViews'
 import { ManualSources } from '../components/ManualSources'
 import type { Job, JobFilters, JobsResponse, JobStatus, ManualJobCreate, RefreshRun, SavedView } from '../types'
 
-const DEFAULT_FILTERS: JobFilters = { sort_by: 'date_found', sort_order: 'desc', page: 1, page_size: 25 }
+const DEFAULT_FILTERS: JobFilters = { status: 'New', stale: false, sort_by: 'date_found', sort_order: 'desc', page: 1, page_size: 25 }
 const EMPTY_DATA: JobsResponse = { items: [], total: 0, page: 1, page_size: 25, total_pages: 0,
   summary: { New: 0, Applied: 0, 'Not Interested': 0, Declined: 0, Stale: 0 } }
 
@@ -77,7 +77,7 @@ export function Dashboard({ client = defaultApi }: DashboardProps) {
         const run = await client.refresh(runId)
         if (run.state !== 'running') {
           setRefreshResult(run)
-          setAnnouncement(`Search complete: ${run.new_jobs_count} new jobs added, ${run.existing_jobs_count} existing jobs updated, ${run.stale_jobs_count} jobs marked stale.`)
+          setAnnouncement(`Search complete: ${run.new_jobs_count} new jobs added, ${run.existing_jobs_count} existing jobs updated, ${run.stale_jobs_count} jobs marked stale. Showing fresh jobs that still need a decision.`)
           await Promise.all([loadJobs(filtersRef.current), loadSupportingData()])
           break
         }
@@ -100,6 +100,10 @@ export function Dashboard({ client = defaultApi }: DashboardProps) {
   }, [client, followRefresh, loadSupportingData])
 
   const startRefresh = async () => {
+    const inboxFilters: JobFilters = { ...filtersRef.current, status: 'New', stale: false, page: 1 }
+    filtersRef.current = inboxFilters
+    setSelectedViewId(null)
+    setFilters(inboxFilters)
     setError(''); setRefreshResult(null); setRefreshing(true); setAnnouncement('Searching approved job sources now.')
     try { const started = await client.startRefresh(); await followRefresh(started.run_id) }
     catch (reason) { setError(reason instanceof Error ? reason.message : 'Could not start the search.'); setRefreshing(false) }
@@ -118,9 +122,9 @@ export function Dashboard({ client = defaultApi }: DashboardProps) {
     setJobPending(job.id, true); setError('')
     try {
       const updated = await client.updateJob(job.id, { status })
-      setDetail(current => current?.id === job.id ? updated : current)
+      setDetail(current => current?.id === job.id && filtersRef.current.status === 'New' && status !== 'New' ? null : current?.id === job.id ? updated : current)
       setAnnouncement(`${job.title} status changed to ${status}.`)
-      await loadJobs(filters)
+      await loadJobs({ ...filtersRef.current, page: 1 })
     } catch (reason) { setError(reason instanceof Error ? reason.message : 'Could not update status.') }
     finally { setJobPending(job.id, false) }
   }
@@ -186,7 +190,7 @@ export function Dashboard({ client = defaultApi }: DashboardProps) {
       {error && <div className="notice notice--error" role="alert"><AlertTriangle size={19} /><div><strong>Something needs attention</strong><p>{error}</p></div><button className="icon-button" onClick={() => setError('')} aria-label="Dismiss error"><X size={17} /></button></div>}
       {refreshResult && <div className={`notice notice--${refreshResult.status === 'failed' ? 'error' : 'success'}`} role="status">
         {refreshResult.status === 'failed' ? <AlertTriangle size={19} /> : <CheckCircle2 size={19} />}
-        <div><strong>Search complete</strong><p>{refreshResult.new_jobs_count} new jobs added, {refreshResult.existing_jobs_count} existing jobs updated, {refreshResult.stale_jobs_count} jobs marked stale.</p>
+        <div><strong>Search complete</strong><p>{refreshResult.new_jobs_count} new jobs added, {refreshResult.existing_jobs_count} existing jobs updated, {refreshResult.stale_jobs_count} jobs marked stale. Showing fresh jobs that still need a decision.</p>
           {refreshResult.errors.length > 0 && <ul className="source-errors">{refreshResult.errors.map(item => <li key={`${item.source}-${item.code}`}><strong>{item.source}</strong>: {item.message}</li>)}</ul>}
         </div><button className="icon-button" onClick={() => setRefreshResult(null)} aria-label="Dismiss search result"><X size={17} /></button>
       </div>}

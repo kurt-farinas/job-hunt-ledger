@@ -1,4 +1,5 @@
 import hashlib
+from pathlib import Path
 
 import pytest
 
@@ -125,6 +126,60 @@ def test_full_time_hybrid_and_on_site_are_limited_to_configured_luzon_locations(
     assert not match_job(job(location="Cebu", work_arrangement="Hybrid", employment_type="Full-time"), prefs).qualified
     assert not match_job(job(location=location, work_arrangement="Hybrid", employment_type="Contract"), prefs).qualified
     assert not match_job(job(location=location, work_arrangement="Hybrid", employment_type=None), prefs).qualified
+
+
+@pytest.mark.parametrize("location", [
+    "Clark Freeport Zone", "Angeles City", "Antipolo City", "Bacoor City",
+    "Santa Rosa City", "Legazpi City", "Puerto Princesa City",
+])
+def test_checked_in_preferences_accept_luzon_city_only_locations(location):
+    prefs = JobPreferences.model_validate_json((Path(__file__).resolve().parents[1] / "config" / "job_preferences.json").read_text(encoding="utf-8"))
+    result = match_job(job(location=location, work_arrangement="On-site", employment_type="Full-time"), prefs)
+    assert result.qualified, result.rejection_reason
+
+
+@pytest.mark.parametrize("location", [
+    "Remote - Philippines", "Remote - Worldwide", "Global Remote",
+    "Anywhere in the World", "Location Independent", "Remote - APAC",
+    "Remote - Asia", "Remote - Southeast Asia", "Remote - South East Asia",
+    "Remote - SEA",
+])
+@pytest.mark.parametrize("employment_type", ["Full-time", "Contract"])
+def test_checked_in_preferences_accept_ph_eligible_remote_roles(location, employment_type):
+    prefs = JobPreferences.model_validate_json((Path(__file__).resolve().parents[1] / "config" / "job_preferences.json").read_text(encoding="utf-8"))
+    result = match_job(
+        job(location=location, work_arrangement="Remote", employment_type=employment_type),
+        prefs,
+    )
+    assert result.qualified, result.rejection_reason
+
+
+@pytest.mark.parametrize("location", [
+    "Remote", "Remote - US only", "Remote (Europe)", "Remote - Australia only",
+    "Worldwide except Philippines", "Remote - Asia excluding Philippines",
+])
+def test_checked_in_preferences_reject_remote_roles_without_ph_eligibility(location):
+    prefs = JobPreferences.model_validate_json((Path(__file__).resolve().parents[1] / "config" / "job_preferences.json").read_text(encoding="utf-8"))
+    result = match_job(job(location=location, work_arrangement="Remote", employment_type="Full-time"), prefs)
+    assert not result.qualified
+
+
+@pytest.mark.parametrize("location", ["Philippines", "Cebu", "Davao", "Singapore", ""])
+@pytest.mark.parametrize("arrangement", ["Hybrid", "On-site"])
+def test_checked_in_preferences_reject_non_luzon_or_unknown_non_remote_locations(location, arrangement):
+    prefs = JobPreferences.model_validate_json((Path(__file__).resolve().parents[1] / "config" / "job_preferences.json").read_text(encoding="utf-8"))
+    result = match_job(job(location=location, work_arrangement=arrangement, employment_type="Full-time"), prefs)
+    assert not result.qualified
+
+
+@pytest.mark.parametrize("employment_type", ["Part-time", "Freelance", "Internship", None])
+def test_checked_in_preferences_reject_other_or_missing_employment_types(employment_type):
+    prefs = JobPreferences.model_validate_json((Path(__file__).resolve().parents[1] / "config" / "job_preferences.json").read_text(encoding="utf-8"))
+    result = match_job(
+        job(location="Remote - Philippines", work_arrangement="Remote", employment_type=employment_type),
+        prefs,
+    )
+    assert not result.qualified
 
 
 def test_remote_full_time_is_limited_to_philippines():
