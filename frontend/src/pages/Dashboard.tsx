@@ -195,13 +195,13 @@ export function Dashboard({ client = defaultApi }: DashboardProps) {
         </div><button className="icon-button" onClick={() => setRefreshResult(null)} aria-label="Dismiss search result"><X size={17} /></button>
       </div>}
       {backupResult && <div className="notice notice--success" role="status"><CheckCircle2 size={19} /><div><strong>Private backup ready</strong><p>{backupResult}</p></div><button className="icon-button" onClick={() => setBackupResult('')} aria-label="Dismiss backup result"><X size={17} /></button></div>}
-      <ManualSources onSave={saveManualJob} />
       <Filters filters={filters} onChange={next => { setSelectedViewId(null); setFilters(next) }} total={data.total} />
       <SavedViews views={views} selectedId={selectedViewId} onLoad={view => { setSelectedViewId(view.id); setFilters({ ...DEFAULT_FILTERS, ...view.filters, sort_by: view.sort_by, sort_order: view.sort_order, page: 1 }) }} onCreate={() => { setViewName(''); setViewDialog({ mode: 'create' }) }} onRename={view => { setViewName(view.name); setViewDialog({ mode: 'rename', view }) }} onDelete={setDeleteView} />
       <section className="results" aria-busy={loading}>
         <div className="results__heading"><div><p className="kicker">Observed opportunities</p><h2>Lead register</h2></div><span>{data.total} total · {data.page_size} per page</span></div>
         {loading ? <div className="loading-state" role="status"><span className="loading-line" /><span className="loading-line" /><span className="loading-line" />Loading job records…</div> : <JobList data={data} filters={filters} noteDrafts={noteDrafts} pending={pending} onFilters={setFilters} onOpen={openDetail} onStatus={updateStatus} onNoteDraft={(id, notes) => setNoteDrafts(current => ({ ...current, [id]: notes }))} onSaveNotes={saveNotes} />}
       </section>
+      <ManualSources onSave={saveManualJob} />
     </main>
     {detailLoading && <div className="drawer-loading" role="status">Opening job record…</div>}
     {detail && <JobDetail job={detail} notes={noteDrafts[detail.id] ?? detail.notes} pending={pending.has(detail.id)} onClose={closeDetail} onStatus={status => updateStatus(detail, status)} onNotes={notes => setNoteDrafts(current => ({ ...current, [detail.id]: notes }))} onSaveNotes={() => saveNotes(detail)} />}

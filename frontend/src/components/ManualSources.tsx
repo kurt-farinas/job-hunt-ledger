@@ -38,14 +38,15 @@ export function ManualSources({ onSave }: ManualSourcesProps) {
     finally { setSaving(false) }
   }
   return <section className="manual-sources" aria-labelledby="manual-sources-title">
-    <div className="manual-sources__heading">
+    <details className="manual-sources__details">
+      <summary className="manual-sources__heading">
       <div>
         <p className="kicker"><SearchCheck size={14} /> Search beyond the feeds</p>
         <h2 id="manual-sources-title">Manual search desk</h2>
       </div>
-      <p>These sites open in a new tab. The dashboard does not read, scrape, sign in, or apply on them.</p>
-    </div>
-    <div className="manual-sources__body">
+      <p>Open trusted boards or save a listing. The dashboard does not read, scrape, sign in, or apply.</p>
+      </summary>
+      <div className="manual-sources__body">
       <nav className="manual-sources__links" aria-label="Manual job sites">
         {sites.map(site => <a key={site.name} href={site.url} target="_blank" rel="noopener noreferrer">
           <span><strong>{site.name}</strong><small>{site.note}</small></span><ExternalLink size={16} aria-hidden="true" />
@@ -62,6 +63,7 @@ export function ManualSources({ onSave }: ManualSourcesProps) {
         {error && <p className="manual-save__source manual-save__source--error" role="alert">{error}</p>}
         <button className="button button--primary" disabled={!source || !title.trim() || !company.trim() || saving}>{saving ? 'Saving lead…' : 'Save job'}</button>
       </form>
-    </div>
+      </div>
+    </details>
   </section>
 }

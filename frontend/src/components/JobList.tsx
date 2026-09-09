@@ -42,7 +42,7 @@ export function JobList({ data, filters, noteDrafts, pending, onFilters, onOpen,
   }
   return <>
     <div className="ledger" aria-label="Job leads">
-      <div className="ledger__head" aria-hidden="true"><span>Role and place</span><span>Match evidence</span><span>Source record</span><span>Tracking</span></div>
+      <div className="ledger__head" aria-hidden="true"><span>Role and place</span><span>Why it fits</span><span>Your decision</span></div>
       {data.items.map(job => {
         const draft = noteDrafts[job.id] ?? job.notes
         const changed = draft !== job.notes
@@ -57,16 +57,11 @@ export function JobList({ data, filters, noteDrafts, pending, onFilters, onOpen,
           <div className="job-row__evidence">
             <div className="tag-list">{job.match_reasons.map(reason => <span className="tag" key={reason}>{reason}</span>)}</div>
             <dl className="compact-facts"><div><dt>Arrangement</dt><dd>{job.work_arrangement || 'Not provided'}</dd></div><div><dt>Employment</dt><dd>{job.employment_type || 'Not provided'}</dd></div><div><dt>Salary</dt><dd>{salary(job)}</dd></div></dl>
-          </div>
-          <div className="job-row__source">
-            <span className="source-stamp">{sourceLabel(job.source)}</span>
-            <dl className="compact-facts compact-facts--stack"><div><dt>Date found</dt><dd>{localDate(job.date_found)}</dd></div><div><dt>Posted</dt><dd>{localDate(job.posted_at)}</dd></div></dl>
-            <a className="external-link" href={job.source_url} target="_blank" rel="noopener noreferrer">Original listing <ExternalLink size={15} /></a>
+            <div className="job-row__source"><span className="source-stamp">{sourceLabel(job.source)}</span><span>Found {localDate(job.date_found)}</span><a className="external-link" href={job.source_url} target="_blank" rel="noopener noreferrer">Original listing <ExternalLink size={15} /></a></div>
           </div>
           <div className="job-row__tracking">
             <label className="field"><span>Status</span><select aria-label={`Status for ${job.title}`} value={job.status} disabled={pending.has(job.id)} onChange={event => onStatus(job, event.target.value as JobStatus)}>{statuses.map(status => <option key={status}>{status}</option>)}</select></label>
-            <label className="field"><span>Notes</span><textarea aria-label={`Notes for ${job.title}`} rows={3} value={draft} disabled={pending.has(job.id)} onChange={event => onNoteDraft(job.id, event.target.value)} placeholder="Add a private note…" /></label>
-            <button className="button button--compact button--save" disabled={!changed || pending.has(job.id)} onClick={() => onSaveNotes(job)}><Save size={15} /> {pending.has(job.id) ? 'Saving…' : 'Save notes'}</button>
+            <details className="job-row__notes"><summary>{job.notes ? 'View or edit note' : 'Add a private note'}</summary><div><label className="field"><span>Notes</span><textarea aria-label={`Notes for ${job.title}`} rows={3} value={draft} disabled={pending.has(job.id)} onChange={event => onNoteDraft(job.id, event.target.value)} placeholder="Add a private note…" /></label><button className="button button--compact button--save" disabled={!changed || pending.has(job.id)} onClick={() => onSaveNotes(job)}><Save size={15} /> {pending.has(job.id) ? 'Saving…' : 'Save notes'}</button></div></details>
           </div>
         </article>
       })}

@@ -34,12 +34,17 @@ export function Header({ summary, lastRun, refreshing, onRefresh, onExport, onBa
       </div>
     </div>
     <div className="masthead__actions">
-      <button className="button button--quiet" onClick={onExport}><Download size={17} /> Export CSV</button>
-      <button className="button button--quiet" onClick={onBackup}><DatabaseBackup size={17} /> Backup database</button>
       <button className="button button--primary" onClick={onRefresh} disabled={refreshing}>
         <RefreshCw size={18} className={refreshing ? 'spin' : ''} />
         {refreshing ? 'Finding jobs…' : 'Find jobs now'}
       </button>
+      <details className="masthead__tools">
+        <summary>More tools</summary>
+        <div className="masthead__tools-menu">
+          <button className="button button--quiet" onClick={onExport}><Download size={17} /> Export CSV</button>
+          <button className="button button--quiet" onClick={onBackup}><DatabaseBackup size={17} /> Backup database</button>
+        </div>
+      </details>
     </div>
     <dl className="counter-strip" aria-label="Application summary">
       {counters.map(({ key, label }) => <div className={`counter counter--${key.toLowerCase().replace(' ', '-')}`} key={key}>
