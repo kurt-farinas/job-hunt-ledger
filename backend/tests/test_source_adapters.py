@@ -200,7 +200,7 @@ async def test_greenhouse_fixtures_use_board_name_content_metadata_and_pay_range
     assert job.posted_at == datetime(2026, 9, 5, 10, tzinfo=timezone.utc)
     assert job.job_description == "Build React interfaces with a Laravel team."
     assert [request.url.path for request in requests] == ["/v1/boards/acme", "/v1/boards/acme/jobs"]
-    assert requests[1].url.params["content"] == "true"
+    assert requests[1].url.params["content"] == "false"
 
 
 def test_greenhouse_rejects_missing_location_and_inverted_salary():

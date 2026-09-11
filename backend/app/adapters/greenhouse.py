@@ -114,7 +114,10 @@ class GreenhouseAdapter:
             try:
                 root = f"https://boards-api.greenhouse.io/v1/boards/{slug}"
                 board = await self._json(root, {})
-                payload = await self._json(f"{root}/jobs", {"content": "true"})
+                # Full descriptions can exceed the shared response safety limit on
+                # large boards. The standard endpoint still provides the fields
+                # required for matching and the official application URL.
+                payload = await self._json(f"{root}/jobs", {"content": "false"})
                 if not isinstance(board, dict) or not text(board.get("name")).strip():
                     raise SourceError("invalid_response", "Greenhouse returned invalid job board details.")
                 if not isinstance(payload, dict) or not isinstance(payload.get("jobs"), list):

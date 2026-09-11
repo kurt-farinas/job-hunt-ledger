@@ -17,11 +17,11 @@ def test_checked_in_configs_have_safe_defaults():
     assert sources.sources["adzuna"].country == "ph"
     assert sources.sources["adzuna"].max_pages == 3
     assert sources.model_dump()["sources"]["adzuna"]["query"] == "developer"
-    assert not sources.sources["remoteok"].enabled
-    assert not sources.sources["we_work_remotely"].enabled
+    assert sources.sources["remoteok"].enabled
+    assert sources.sources["we_work_remotely"].enabled
     assert not sources.sources["remotive"].enabled
     assert sources.sources["remotive"].category == "software-dev"
-    assert not sources.sources["jobicy"].enabled
+    assert sources.sources["jobicy"].enabled
     assert sources.sources["jobicy"].industry == "engineering"
     assert not sources.sources["himalayas"].enabled
     assert sources.sources["himalayas"].country == "Philippines"
@@ -30,7 +30,8 @@ def test_checked_in_configs_have_safe_defaults():
     assert sources.sources["himalayas"].employment_type == "Full Time"
     assert sources.sources["himalayas"].exclude_worldwide is True
     assert sources.sources["remoteok"].max_items == 250
-    assert sources.sources["greenhouse"].company_slugs == []
+    assert sources.sources["greenhouse"].enabled
+    assert sources.sources["greenhouse"].company_slugs == ["gitlab", "coinbase", "stripe", "figma", "airbnb", "hubspot"]
     assert sources.sources["lever"].enabled
     assert sources.sources["lever"].company_slugs == ["coins", "Aprio", "portcast", "ciandt", "rocketpartners", "getwingapp"]
     assert sources.sources["lever"].max_pages == 5
@@ -50,6 +51,7 @@ def test_checked_in_configs_have_safe_defaults():
     assert prefs.require_work_arrangement_match is True
     assert prefs.accepted_employment_types == ["Full-time", "Contract"]
     assert prefs.require_employment_type_match is True
+    assert {"junior frontend developer", "junior full-stack developer", "junior software developer", "php laravel developer"} <= set(prefs.included_title_keywords)
 
 
 @pytest.mark.parametrize("config", [
